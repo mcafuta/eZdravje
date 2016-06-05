@@ -42,7 +42,7 @@ h4, #txt{
     color: #002e4d;
 }
 body {padding: 10px;
-    background-image: url("knjiznice/images/lh.jpg");
+    background-image: url("/knjiznice/images/lh.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -56,5 +56,7 @@ padding: 0;
 }
 
 img{
-    width: 500px;
+    width: auto;
+    max-width: inherit;
+    max-height: inherit;
 }
