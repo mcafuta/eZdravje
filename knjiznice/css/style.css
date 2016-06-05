@@ -42,7 +42,7 @@ h4, #txt{
     color: #002e4d;
 }
 body {padding: 10px;
-    background-image: url("/knjiznice/images/lh.jpg");
+    background-image: url("knjiznice/images/lh.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
