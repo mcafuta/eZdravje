@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Draggable directions</title>
+    <style>
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+        float: left;
+        width: 63%;
+        height: 100%;
+      }
+      #right-panel {
+        float: right;
+        width: 34%;
+        height: 100%;
+      }
+      .panel {
+        height: 100%;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="right-panel">
+      <p>Total Distance: <span id="total"></span></p>
+    </div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: {lat: 46.05, lng: 14.5}  // SLO.
+        });
+
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+          draggable: true,
+          map: map,
+          panel: document.getElementById('right-panel')
+        });
+
+        directionsDisplay.addListener('directions_changed', function() {
+          computeTotalDistance(directionsDisplay.getDirections());
+        });
+        var easySS = [{lat: 46.0665, lng: 14.519}, {lat: 46.0665, lng: 14.519}];
+        var easyWaypoints =  [{location: {lat: 46.079, lng: 14.52}},{location: {lat: 46.076, lng: 14.524}},{location: {lat: 46.07, lng: 14.526}}];
+        var mediumSS =[{lat: 46.0665, lng: 14.519}, {lat: 46.0665, lng: 14.519}];
+        var mediumWaypoints = [{location: {lat: 46.075, lng: 14.524}},{location: {lat: 46.082, lng: 14.52}},{location: {lat: 46.08, lng: 14.53}},{location: {lat: 46.075, lng: 14.54}},{location: {lat: 46.07, lng: 14.536}},{location: {lat: 46.066, lng: 14.52}}];
+        var hardSS = [{lat: 46.0665, lng: 14.519}, {lat: 46.0665, lng: 14.519}];
+        var hardWaypoints = [{location: {lat: 46.055, lng: 14.5}},{location: {lat: 46.053, lng: 14.482}},{location: {lat: 46.054, lng: 14.47}},{location: {lat: 46.0695, lng: 14.482}}];
+        var level = 0;
+        var startstop = [];
+        var wp = [];
+        if(level == 1){
+          startstop = easySS;
+          wp = easyWaypoints;
+        }
+        else if(level == 2){
+          startstop = mediumSS;
+          wp = mediumWaypoints;
+        }
+        else if(level == 3){
+          startstop = hardSS;
+          wp = hardWaypoints;
+        }
+        if(level != 0)
+        displayRoute(startstop[0],startstop[0], directionsService,
+            directionsDisplay, wp);
+      }
+
+      function displayRoute(origin, destination, service, display,wp) {
+        service.route({
+          origin: origin,
+          destination: destination,
+          waypoints: wp/*[{location: {lat: 46.075, lng: 14.524}},{location: {lat: 46.082, lng: 14.52}},{location: {lat: 46.08, lng: 14.53}},{location: {lat: 46.075, lng: 14.54}},{location: {lat: 46.07, lng: 14.536}},{location: {lat: 46.066, lng: 14.52}}/*{location: {lat: 46.06, lng: 14.5}}, {location: {lat: 46.05, lng: 14.5}}]*/,
+          travelMode: google.maps.TravelMode.WALKING,
+          avoidTolls: true
+        }, function(response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            display.setDirections(response);
+          } else {
+            alert('Could not display directions due to: ' + status);
+          }
+        });
+      }
+
+      function computeTotalDistance(result) {
+        var total = 0;
+        var myroute = result.routes[0];
+        for (var i = 0; i < myroute.legs.length; i++) {
+          total += myroute.legs[i].distance.value;
+        }
+        total = total / 1000;
+        document.getElementById('total').innerHTML = total + ' km';
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAiWhrFljGGMN0TBXlqFbHSbpFFTlqz98&callback=initMap">
+    </script>
+  </body>
+</html>

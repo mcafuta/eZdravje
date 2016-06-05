@@ -193,7 +193,7 @@ function dodajMeritveVitalnihZnakov() {
 
 /**
  * Pridobivanje vseh zgodovinskih podatkov meritev izbranih vitalnih znakov
- * (telesna temperatura, telesna teža in ITM).
+ * (telesna temperatura, filtriranje telesne temperature in telesna teža).
  * Filtriranje telesne temperature je izvedena z AQL poizvedbo, ki se uporablja
  * za napredno iskanje po zdravstvenih podatkih.
  */
@@ -554,7 +554,6 @@ function generirajPodatke(userNo){
 			$("#dodajVitalnoDatumInUra").val(year +"-"+ month+"-"+day+"T"+h+":"+min);
 			$("#dodajVitalnoTelesnaVisina").val(rand(160, 180)+10*userNo);
 			$("#dodajVitalnoTelesnaTeza").val(rand(50,65)+20*(userNo-1));
-			$("#dodajVitalnoTelesnaTemperatura").val(rand(35,42));
 			$("#dodajVitalnoKrvniTlakSistolicni").val(rand(60, 220));
 			$("#dodajVitalnoKrvniTlakDiastolicni").val(rand(40, 120));
 			$("#dodajVitalnoMerilec").val('Grumpy nurse');
@@ -604,7 +603,6 @@ function generiraj(){
 				$("#dodajVitalnoDatumInUra").val("");
 				$("#dodajVitalnoTelesnaVisina").val("");
 				$("#dodajVitalnoTelesnaTeza").val("");
-				$("#dodajVitalnoTelesnaTemperatura").val("");
 				$("#dodajVitalnoKrvniTlakSistolicni").val("");
 				$("#dodajVitalnoKrvniTlakDiastolicni").val("");
 				$("#dodajVitalnoMerilec").val("");

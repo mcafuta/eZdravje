@@ -1,0 +1,60 @@
+.panel-heading{
+    padding: 10px;
+}
+
+.user-label{
+    padding: 5px;
+}
+
+.map-visible{
+	      	width: 500px ;
+	      	height: 400px;
+	      }
+
+.right-panel {
+    width: 50px;
+    height: 30px;
+}
+
+.clickable{
+    /*background-color: #f2f2f2;*/
+    min-width: 100px;
+    
+}
+.clickable:active{
+    text-decoration: underline;
+}
+
+#rezultatPredlaganeAktivnosti .clickable{
+    border: none;
+    background-color: transparent;
+    width: inherit;
+    display: inline-block;
+    outline: none;
+    text-align: left;
+}
+
+h4, #txt{
+    font: italic !important;
+    font-family: sans-serif;
+    padding: 2px !important;
+    margin: 2px!important;
+    color: #002e4d;
+}
+body {padding: 10px;
+    background-image: url("/images/lh.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.btn {margin-top: 10px;}
+.obvestilo {margin-left:10px;}
+.majhna-ikona {font-size:60%; margin-left:10px}
+.gmap {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+img{
+    width: 500px;
+}
